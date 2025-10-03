@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Administrator admin = new Administrator("admin", "1234");  // Cambia contraseña si quieres
+        Administrator admin = new Administrator("admin", "1234"); // Cambia contraseña si quieres
         FileManager fileManager = new FileManager();
         ClinicManager manager = new ClinicManager(admin, fileManager);
 
@@ -155,22 +155,22 @@ public class Main {
                         String action = scanner.nextLine();
                         if (action.equals("modificar")) {
                             System.out.println("Nueva fecha (YYYY-MM-DD):");
-                            app.setDate(LocalDate.parse(scanner.nextLine()));
+                            LocalDate newDate = LocalDate.parse(scanner.nextLine());
                             System.out.println("Nueva hora (HH:MM):");
-                            app.setTime(LocalTime.parse(scanner.nextLine()));
+                            LocalTime newTime = LocalTime.parse(scanner.nextLine());
                             System.out.println("Nuevo motivo:");
-                            app.setReason(scanner.nextLine());
-                            // Remover temporalmente para verificar disponibilidad
-                            manager.appointments.remove(app);
-                            app.getDoctor().removeAppointment(app);
-                            app.getPatient().removeAppointment(app);
-                            if (manager.scheduleAppointment(app)) {
+                            String newReason = scanner.nextLine();
+
+                            // Cancelar cita actual para verificar disponibilidad
+                            manager.cancelAppointment(appId);
+
+                            // Crear nueva cita con datos actualizados
+                            Appointment updatedApp = new Appointment(appId, newDate, newTime, newReason, app.getDoctor(), app.getPatient());
+                            if (manager.scheduleAppointment(updatedApp)) {
                                 System.out.println("Cita modificada con éxito");
                             } else {
-                                // Revertir si falla
-                                manager.appointments.add(app);
-                                app.getDoctor().addAppointment(app);
-                                app.getPatient().addAppointment(app);
+                                // Revertir: reprogramar cita original si falla
+                                manager.scheduleAppointment(app);
                                 System.out.println("Error: Doctor no disponible");
                             }
                         } else if (action.equals("cancelar")) {
