@@ -1,43 +1,43 @@
-project xmlns=httpmaven.apache.orgPOM4.0.0
-         xmlnsxsi=httpwww.w3.org2001XMLSchema-instance
-         xsischemaLocation=httpmaven.apache.orgPOM4.0.0 httpmaven.apache.orgxsdmaven-4.0.0.xsd
-    modelVersion4.0.0modelVersion
-    groupIdcom.examplegroupId
-    artifactIdclinic-systemartifactId
-    version1.0version
-    packagingjarpackaging
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
+    <artifactId>clinic-system</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
 
-    properties
-        maven.compiler.source1.8maven.compiler.source
-        maven.compiler.target1.8maven.compiler.target
-    properties
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-    build
-        plugins
-            !-- Plugin para generar FAT JAR --
-            plugin
-                groupIdorg.apache.maven.pluginsgroupId
-                artifactIdmaven-assembly-pluginartifactId
-                version3.3.0version
-                configuration
-                    descriptorRefs
-                        descriptorRefjar-with-dependenciesdescriptorRef
-                    descriptorRefs
-                    archive
-                        manifest
-                            mainClassMainmainClass  !-- Clase principal --
-                        manifest
-                    archive
-                configuration
-                executions
-                    execution
-                        phasepackagephase
-                        goals
-                            goalsinglegoal
-                        goals
-                    execution
-                executions
-            plugin
-        plugins
-    build
-project
+    <build>
+        <plugins>
+            <!-- Plugin para generar FAT JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>Main</mainClass>  <!-- Clase principal -->
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
