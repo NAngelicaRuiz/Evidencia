@@ -1,0 +1,43 @@
+project xmlns=httpmaven.apache.orgPOM4.0.0
+         xmlnsxsi=httpwww.w3.org2001XMLSchema-instance
+         xsischemaLocation=httpmaven.apache.orgPOM4.0.0 httpmaven.apache.orgxsdmaven-4.0.0.xsd
+    modelVersion4.0.0modelVersion
+    groupIdcom.examplegroupId
+    artifactIdclinic-systemartifactId
+    version1.0version
+    packagingjarpackaging
+
+    properties
+        maven.compiler.source1.8maven.compiler.source
+        maven.compiler.target1.8maven.compiler.target
+    properties
+
+    build
+        plugins
+            !-- Plugin para generar FAT JAR --
+            plugin
+                groupIdorg.apache.maven.pluginsgroupId
+                artifactIdmaven-assembly-pluginartifactId
+                version3.3.0version
+                configuration
+                    descriptorRefs
+                        descriptorRefjar-with-dependenciesdescriptorRef
+                    descriptorRefs
+                    archive
+                        manifest
+                            mainClassMainmainClass  !-- Clase principal --
+                        manifest
+                    archive
+                configuration
+                executions
+                    execution
+                        phasepackagephase
+                        goals
+                            goalsinglegoal
+                        goals
+                    execution
+                executions
+            plugin
+        plugins
+    build
+project
